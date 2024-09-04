@@ -66,7 +66,7 @@ export const getUserLogbook = async (req, res ) => {
     }
 }
 
-export const editUserLogbook= async (req, res) => {
+export const updateUserLogbook= async (req, res) => {
   const { entryId } = req.params
 
   const { day, nature_of_activities, date, extra, image} = req.body
