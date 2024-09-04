@@ -66,6 +66,8 @@ export const getUserLogbook = async (req, res ) => {
     }
 }
 
+
+//Update a logbook entry
 export const updateUserLogbook= async (req, res) => {
   const { entryId } = req.params
 
@@ -89,6 +91,7 @@ export const updateUserLogbook= async (req, res) => {
   }
 }
 
+//Delete a logbook entry
 export const deleteUserLogbook = async (req, res) => { 
   const { entryId } = req.params
 
