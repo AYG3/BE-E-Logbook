@@ -50,7 +50,7 @@ export const getUserLogbooks = async (req, res) => {
 
 //gets a specific entry
 export const getUserLogbook = async (req, res ) => {
-    const { entryId } = req.body
+    const { entryId } = req.params
     
     try {     
       const entry = await findById(entryId)
@@ -66,3 +66,11 @@ export const getUserLogbook = async (req, res ) => {
     }
 }
 
+export const editUserLogbook= async (req, res) => {
+  const { entryId } = req.params
+  try {
+    
+  } catch (error) {
+    
+  }
+}
