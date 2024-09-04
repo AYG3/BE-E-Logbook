@@ -5,7 +5,7 @@ import { protect } from '../middleware/protect.js'
 const router = express.Router()
 
 router.post('/logbookEntry', protect, createLogbook)
-router.get('/userLogbooks', protect, getUserLogbooks)
+router.get('/userLogbooks/:userId', protect, getUserLogbooks)
 router.get('/userLogbook/:entryId', protect, getUserLogbooks)
 router.put('/editLogbook/:entryId', protect, updateUserLogbook)
 router.delete('/deleteLogbook/:entryId', protect, deleteUserLogbook)

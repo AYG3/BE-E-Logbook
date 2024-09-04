@@ -35,15 +35,17 @@ export const createLogbook = async (req, res) => {
 //gets all users entries
 export const getUserLogbooks = async (req, res) => {
     // const userId = req.body
-    const { userId } = req.body
+    const { userId } = req.params
+
+    console.log(`Getting all entries userId: ${userId}`)
 
     try {
         const logbooks = await Logbook.find({ user: userId})
         return res.status(201).json(logbooks)
         
     } catch (error) {
+      console.log(error)
       return res.status(500).json({message: 'User Logbooks fetch error'})
-        console.log(error)
     }
 }
 
