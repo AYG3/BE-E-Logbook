@@ -71,16 +71,20 @@ export const editUserLogbook= async (req, res) => {
 
   const { day, nature_of_activities, date, extra, image} = req.body
 
+  if (!day || !nature_of_activities || !date) {
+    return res.status(400).json({ message: 'Day, nature of activities, and date are required' });
+  }
+
   try {
     const updatedEntry = await Logbook.findByIdAndUpdate(entryId, {day, nature_of_activities, date, extra, image}, { new: true})
     
     if(!updatedEntry){
-      res.status(404).json({message: 'Entry not edited, cuz its prolly not found'})
+      return res.status(404).json({message: 'Entry not edited, cuz its prolly not found'})
     }
 
-    res.status(200).json(updatedEntry)
+    return res.status(200).json(updatedEntry)
   } catch (error) {
-    res.status(500).json({ message: 'Error editing entry'})
-    console.log(error)
+    return res.status(500).json({ message: 'Error editing entry'})
+    console.log(error.stack)
   }
 }
