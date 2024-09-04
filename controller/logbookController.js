@@ -24,9 +24,9 @@ export const createLogbook = async (req, res) => {
     user.logbooks.push(savedEntry._id)
     await user.save();
 
-    res.status(201).json(savedEntry)
+    return res.status(201).json(savedEntry)
   } catch (error) {
-    res.status(500).json({ message: 'User Logbook Entry Error'})
+    return res.status(500).json({ message: 'User Logbook Entry Error'})
     console.log(error)
   }
 };
@@ -39,10 +39,10 @@ export const getUserLogbooks = async (req, res) => {
 
     try {
         const logbooks = await Logbook.find({ user: userId})
-        res.status(201).json(logbooks)
+        return res.status(201).json(logbooks)
         
     } catch (error) {
-        res.status(500).json({message: 'User Logbooks fetch error'})
+      return res.status(500).json({message: 'User Logbooks fetch error'})
         console.log(error)
     }
 }
@@ -56,12 +56,12 @@ export const getUserLogbook = async (req, res ) => {
       const entry = await Logbook.findById(entryId)
       
       if(!entry){
-        res.status(404).json({ message: 'Entry not found'})
+        return res.status(404).json({ message: 'Entry not found'})
       }
       
       res.status(200).json(entry)
     } catch (error) {
-      res.status(500).json({ message: 'Single entry fetch error'})
+      return res.status(500).json({ message: 'Single entry fetch error'})
       console.log(error)
     }
 }
@@ -84,7 +84,25 @@ export const editUserLogbook= async (req, res) => {
 
     return res.status(200).json(updatedEntry)
   } catch (error) {
-    return res.status(500).json({ message: 'Error editing entry'})
     console.log(error.stack)
+    return res.status(500).json({ message: 'Error editing entry'})
+  }
+}
+
+export const deleteUserLogbook = async (req, res) => { 
+  const { entryId } = req.params
+
+  try {
+    const entry = await Logbook.findByIdAndDelete(entryId)
+
+    if(!entry){
+      return res.status(404).json({ message: 'Delete error: prolly didn\'t find entry'})
+    }
+
+    return res.status(200).json({message: 'Entry deleted successfully'})
+
+  } catch (error) {
+    console.error(error.stack)
+    return res.status(500).json({ message: 'Error deleting entry'})
   }
 }
