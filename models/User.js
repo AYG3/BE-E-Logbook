@@ -20,7 +20,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    //why the brackets
     logbooks:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Logbook',

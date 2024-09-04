@@ -3,8 +3,8 @@ import Logbook from "../models/Logbook.js";
 import User from "../models/User.js";
 
 export const createLogbook = async (req, res) => {
-//   const { day, nature_of_activites, date, extra, image } = req.body;
   const { day, nature_of_activities, date, extra, image, userId } = req.body;
+//   const { day, nature_of_activites, date, extra, image } = req.body;
 //   const userId = req.user._id;
 
   try {
