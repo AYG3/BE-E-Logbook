@@ -32,6 +32,7 @@ export const createLogbook = async (req, res) => {
 };
 
 
+//gets all users entries
 export const getUserLogbooks = async (req, res) => {
     // const userId = req.body
     const { userId } = req.body
@@ -43,6 +44,25 @@ export const getUserLogbooks = async (req, res) => {
     } catch (error) {
         res.status(500).json({message: 'User Logbooks fetch error'})
         console.log(error)
+    }
+}
+
+
+//gets a specific entry
+export const getUserLogbook = async (req, res ) => {
+    const { entryId } = req.body
+    
+    try {     
+      const entry = await findById(entryId)
+      
+      if(!entry){
+        res.status(404).json({ message: 'Entry not found'})
+      }
+      
+      res.status(200).json(entry)
+    } catch (error) {
+      res.status(500).json({ message: 'Single entry fetch error'})
+      console.log(error)
     }
 }
 
