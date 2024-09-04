@@ -53,7 +53,7 @@ export const getUserLogbook = async (req, res ) => {
     const { entryId } = req.params
     
     try {     
-      const entry = await findById(entryId)
+      const entry = await Logbook.findById(entryId)
       
       if(!entry){
         res.status(404).json({ message: 'Entry not found'})
@@ -68,9 +68,19 @@ export const getUserLogbook = async (req, res ) => {
 
 export const editUserLogbook= async (req, res) => {
   const { entryId } = req.params
+
+  const { day, nature_of_activities, date, extra, image} = req.body
+
   try {
+    const updatedEntry = await Logbook.findByIdAndUpdate(entryId, {day, nature_of_activities, date, extra, image}, { new: true})
     
+    if(!updatedEntry){
+      res.status(404).json({message: 'Entry not edited, cuz its prolly not found'})
+    }
+
+    res.status(200).json(updatedEntry)
   } catch (error) {
-    
+    res.status(500).json({ message: 'Error editing entry'})
+    console.log(error)
   }
 }
