@@ -94,7 +94,12 @@ export const adminSignUp = async (req, res) => {
         // const salt = await bcrypt.genSalt(11);
         // const hashedPassword = await bcrypt.hash(password, salt)
 
+        const userExists = await User.findOne({ email })
 
+        if(userExists){
+            res.status(400).json({message: 'Admin User Already Exists' })
+        }
+         
         const user = await User.create({
             fname,
             lname,
@@ -103,7 +108,7 @@ export const adminSignUp = async (req, res) => {
             role: 'admin',
         })
 
-        const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '30d' })
+        const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '30d' })
 
         res.status(200).json({
             _id: user.id,
@@ -112,6 +117,18 @@ export const adminSignUp = async (req, res) => {
             email:user.email,
             token
         })
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Failed to register admin account'});
+    }
+}
+
+export const adminLogin = async (req, res) => {
+    const { email, password } = req.body
+
+    try {
+        const user = await User.findOne({ email })
     } catch (error) {
         
     }
