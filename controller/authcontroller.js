@@ -114,7 +114,7 @@ export const adminSignUp = async (req, res) => {
             _id: user.id,
             fname: user.fname,
             lname: user.lname,
-            email:user.email,
+            email: user.email,
             token
         })
 
@@ -134,8 +134,21 @@ export const adminLogin = async (req, res) => {
             res.status(400).json({ message: 'User does not exist'})
         }
 
-        const salt = bcrypt.genSalt(11)
-        const isMatch = await bcrypt.compare(user.password, salt)
+        const isMatch = await bcrypt.compare(password, user.password)
+        
+        if (!isMatch){
+            res.status(400).json({ message: 'Wrong password' })
+        }
+
+        const token = await jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '30d'});
+
+        res.status(200).json({
+            id: user._id,
+            fname: user.fname,
+            lname: user.lname,
+            email: user.email,
+            token   
+        })
         
     } catch (error) {
         
