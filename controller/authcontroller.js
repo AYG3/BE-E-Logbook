@@ -103,7 +103,7 @@ export const adminSignUp = async (req, res) => {
             role: 'admin',
         })
 
-        const token = jwt.sign({ email: user.email },)
+        const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '30d' })
 
         res.status(200).json({
             _id: user.id,
