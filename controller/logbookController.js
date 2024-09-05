@@ -107,7 +107,7 @@ export const deleteUserLogbook = async (req, res) => {
     return res.status(200).json({message: 'Entry deleted successfully'})
 
   } catch (error) {
-    console.error(error.stack)
+    console.error(error)
     return res.status(500).json({ message: 'Error deleting entry'})
   }
 }
