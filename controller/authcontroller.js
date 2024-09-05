@@ -129,6 +129,14 @@ export const adminLogin = async (req, res) => {
 
     try {
         const user = await User.findOne({ email })
+
+        if (!user) {
+            res.status(400).json({ message: 'User does not exist'})
+        }
+
+        const salt = bcrypt.genSalt(11)
+        const isMatch = await bcrypt.compare(user.password, salt)
+        
     } catch (error) {
         
     }
