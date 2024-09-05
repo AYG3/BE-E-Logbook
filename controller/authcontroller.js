@@ -86,6 +86,37 @@ export const logout = async (req, res) => {
 
 }
 
+export const adminSignUp = async (req, res) => {
+    const { fname, lname, email, password } = req.body;
+
+    try {
+
+        // const salt = await bcrypt.genSalt(11);
+        // const hashedPassword = await bcrypt.hash(password, salt)
+
+
+        const user = await User.create({
+            fname,
+            lname,
+            email,
+            password,
+            role: 'admin',
+        })
+
+        const token = jwt.sign({ email: user.email },)
+
+        res.status(200).json({
+            _id: user.id,
+            fname: user.fname,
+            lname: user.lname,
+            email:user.email,
+            token
+        })
+    } catch (error) {
+        
+    }
+}
+
 export const forgotPassword = async (req, res) => {
     const { email } = req.body
 
