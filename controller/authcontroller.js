@@ -140,7 +140,7 @@ export const adminLogin = async (req, res) => {
             res.status(400).json({ message: 'Wrong password' })
         }
 
-        const token = await jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '30d'});
+        const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '30d'});
 
         res.status(200).json({
             id: user._id,
@@ -151,6 +151,8 @@ export const adminLogin = async (req, res) => {
         })
         
     } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Admin login error'})
         
     }
 }
