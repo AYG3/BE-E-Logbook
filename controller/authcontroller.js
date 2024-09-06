@@ -68,7 +68,7 @@ export const login = async (req, res) => {
 
         console.log(`User: ${user}, Token: ${token}`)
 
-        res.json({
+        res.status(201).json({
             _id: user.id,
             fname: user.fname,
             lname: user.lname,

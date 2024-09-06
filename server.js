@@ -11,14 +11,11 @@ dotenv.config();
 const app = express();
 app.use(cors());
 
-connectDB();
 app.use(express.json());
 
 app.use("/auth", authRoutes);
 app.use("/logbook", logbookRoutes);
 
-app.listen(4444, () => {
-  console.log("Server running on http://localhost:4444");
-});
+connectDB();
 
 export default app;
