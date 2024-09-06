@@ -132,8 +132,11 @@ export const adminGetUserLogbooks = async (req, res) => {
     const userLogbooks = await Logbook.find({ id });
 
     if (!userLogbooks){
-      
+      res.status(400).json({ message: 'No user Logbooks/Entries'})
     }
+
+    res.status(200).json(userLogbooks)
+
   } catch (error) {
     
   }
