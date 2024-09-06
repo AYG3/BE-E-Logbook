@@ -112,7 +112,7 @@ export const deleteUserLogbook = async (req, res) => {
   }
 }
 
-export const getAllUsers = async (req, res) => {
+export const adminGetAllUsers = async (req, res) => {
 
   try {
     const users = await User.find({ role: {$ne: 'admin'}}).select('-password'); //try not addding select()
@@ -125,6 +125,12 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
-export const getUsersLogbooks = async (req, res) => {
-  
+export const adminGetUserLogbooks = async (req, res) => {
+  const { id } = req.params
+
+  try {
+    
+  } catch (error) {
+    
+  }
 }
