@@ -26,6 +26,7 @@ export const signUp = async (req, res) => {
             password
         });
 
+        //remove
         const token = jwt.sign({ email: user.email}, process.env.JWT_SECRET, {
             expiresIn: '30d',
         });
