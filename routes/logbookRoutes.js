@@ -1,5 +1,5 @@
 import express from "express";
-import { createLogbook, updateUserLogbook, getUserLogbooks, deleteUserLogbook, getUserLogbook } from "../controller/logbookController.js";
+import { createLogbook, updateUserLogbook, getUserLogbooks, deleteUserLogbook, getUserLogbook, getAllUsers } from "../controller/logbookController.js";
 import { isAdmin, protect } from '../middleware/protect.js'
 
 const router = express.Router()
