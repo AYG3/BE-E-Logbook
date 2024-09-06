@@ -129,7 +129,11 @@ export const adminGetUserLogbooks = async (req, res) => {
   const { id } = req.params
 
   try {
-    
+    const userLogbooks = await Logbook.find({ id });
+
+    if (!userLogbooks){
+      
+    }
   } catch (error) {
     
   }
