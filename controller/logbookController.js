@@ -126,12 +126,12 @@ export const adminGetAllUsers = async (req, res) => {
 };
 
 export const adminGetUserLogbooks = async (req, res) => {
-  const { id } = req.params
+  const { userId } = req.params
 
   try {
-    const userLogbooks = await Logbook.find({ id });
+    const userLogbooks = await Logbook.find({ user: userId });
 
-    if (!userLogbooks){
+    if (!userLogbooks.length){
       res.status(400).json({ message: 'User has not made any Logbooks/Entries'})
     }
 
