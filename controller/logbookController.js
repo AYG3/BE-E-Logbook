@@ -132,12 +132,14 @@ export const adminGetUserLogbooks = async (req, res) => {
     const userLogbooks = await Logbook.find({ id });
 
     if (!userLogbooks){
-      res.status(400).json({ message: 'No user Logbooks/Entries'})
+      res.status(400).json({ message: 'User has not made any Logbooks/Entries'})
     }
 
     res.status(200).json(userLogbooks)
 
   } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Error 500 cant get users entries or Logbooks'})
     
   }
 }
