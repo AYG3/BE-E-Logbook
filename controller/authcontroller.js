@@ -14,11 +14,6 @@ export const signUp = async (req, res) => {
             return res.status(400).json(({ message: 'User already exists'}))
         }
 
-        //PASSWORD is already hashed in User Model
-        // const salt = await bcrypt.genSalt(11);
-        // const hashedPassword = await bcrypt.hash(password, salt)
-        // console.log('Hashed Password during signup:', hashedPassword); // Add this line
-
         const user = await User.create({
             fname,
             lname,
@@ -26,18 +21,13 @@ export const signUp = async (req, res) => {
             password
         });
 
-        //remove
-        const token = jwt.sign({ email: user.email}, process.env.JWT_SECRET, {
-            expiresIn: '30d',
-        });
-
         res.status(201).json({
             _id: user.id,
             fname: user.fname,
             lname: user.lname,
             email: user.email,
-            token,
         })
+
     } catch (error) {
         res.status(500).json({ message: 'Server signUp() error'})
         console.log(error, 'Signup authcontroller error')
