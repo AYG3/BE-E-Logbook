@@ -2,7 +2,6 @@ import User from '../models/User.js'
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import nodemailer from 'nodemailer'
-import dotenv from 'dotenv'
 
 export const signUp = async (req, res) => {
     const {fname, lname, email, password } = req.body;
