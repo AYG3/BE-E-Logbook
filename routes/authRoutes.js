@@ -1,5 +1,6 @@
 import express from 'express';
-import { signUp, login, forgotPassword, resetPassword, adminSignUp, adminLogin } from '../controller/authcontroller.js';
+import { signUp, login, forgotPassword, resetPassword, adminSignUp, adminLogin, getUser } from '../controller/authcontroller.js';
+import { protect } from '../middleware/protect.js';
 
 const router = express.Router();
 
@@ -11,4 +12,6 @@ router.put('/restpassword/:resettoken', resetPassword)
 router.post('/adminSignup', adminSignUp)
 router.post('/adminLogin', adminLogin)
 
+//get user details
+router.get('/user', protect, getUser)
 export default router;

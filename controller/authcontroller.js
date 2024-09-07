@@ -76,13 +76,21 @@ export const logout = async (req, res) => {
 
 }
 
+export const getUser = async (req, res) => {
+
+    try {
+        const user = await User.findById(req.user.id).select('-password')
+        res.status(200).json(user)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ message: 'Error fetching user details'})
+    }
+}
+
 export const adminSignUp = async (req, res) => {
     const { fname, lname, email, password } = req.body;
 
     try {
-
-        // const salt = await bcrypt.genSalt(11);
-        // const hashedPassword = await bcrypt.hash(password, salt)
 
         const userExists = await User.findOne({ email })
 
