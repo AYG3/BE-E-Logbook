@@ -13,5 +13,5 @@ router.post('/adminSignup', adminSignUp)
 router.post('/adminLogin', adminLogin)
 
 //get user details
-router.get('/user', protect, getUser)
+router.get('/user/:id', protect, getUser)
 export default router;

@@ -2,10 +2,13 @@ import { response } from "express";
 import Logbook from "../models/Logbook.js";
 import User from "../models/User.js";
 
+
+//create user entry
 export const createLogbook = async (req, res) => {
-  const { day, nature_of_activities, date, extra, image, userId } = req.body;
-//   const { day, nature_of_activites, date, extra, image } = req.body;
-//   const userId = req.user._id;
+  const { day, nature_of_activities, date, user, extra, image  } = req.body;
+  console.log(req.body)
+
+  const userId = req.body.user
 
   try {
     const logbook = new Logbook({
@@ -14,7 +17,7 @@ export const createLogbook = async (req, res) => {
       date,
       extra,
       image,
-      user: userId,
+      user: userId
     });
 
     const savedEntry = await logbook.save();
@@ -24,10 +27,11 @@ export const createLogbook = async (req, res) => {
     user.logbooks.push(savedEntry._id)
     await user.save();
 
-    return res.status(201).json(savedEntry)
+    return res.status(201).json(savedEntry);
   } catch (error) {
-    return res.status(500).json({ message: 'User Logbook Entry Error'})
+
     console.log(error)
+    return res.status(500).json({ message: 'User Logbook Entry Error'})
   }
 };
 
@@ -63,8 +67,8 @@ export const getUserLogbook = async (req, res ) => {
       
       res.status(200).json(entry)
     } catch (error) {
-      return res.status(500).json({ message: 'Single entry fetch error'})
       console.log(error)
+      return res.status(500).json({ message: 'Single entry fetch error'})
     }
 }
 
@@ -83,6 +87,7 @@ export const updateUserLogbook= async (req, res) => {
     const updatedEntry = await Logbook.findByIdAndUpdate(entryId, {day, nature_of_activities, date, extra, image}, { new: true})
     
     if(!updatedEntry){
+      console.log('Not finding your entry')
       return res.status(404).json({message: 'Entry not edited, cuz its prolly not found'})
     }
 
@@ -112,6 +117,7 @@ export const deleteUserLogbook = async (req, res) => {
   }
 }
 
+//Admin get all users
 export const adminGetAllUsers = async (req, res) => {
 
   try {
@@ -125,6 +131,7 @@ export const adminGetAllUsers = async (req, res) => {
   }
 };
 
+//Admin get a user's logbook
 export const adminGetUserLogbooks = async (req, res) => {
   const { userId } = req.params
 
