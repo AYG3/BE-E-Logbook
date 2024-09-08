@@ -14,7 +14,8 @@ const logbookSchema = new mongoose.Schema({
     date: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        default: new Date().toLocaleDateString()
     },
     extra: {
         type: [String],
