@@ -80,7 +80,7 @@ export const updateUserLogbook= async (req, res) => {
   const { day, nature_of_activities, date, extra, image} = req.body
 
   if (!day || !nature_of_activities || !date) {
-    return res.status(400).json({ message: 'Day, nature of activities, and date are required' });
+    return res.status(404).json({ message: 'Day, nature of activities, and date are required' });
   }
 
   try {
