@@ -98,7 +98,7 @@ export const adminSignUp = async (req, res) => {
             res.status(400).json({message: 'Admin User Already Exists' })
         }
          
-        const user = await User.create({
+        const admin = await User.create({
             fname,
             lname,
             email,
@@ -106,13 +106,13 @@ export const adminSignUp = async (req, res) => {
             role: 'admin',
         })
 
-        const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '30d' })
+        const token = jwt.sign({ id: admin._id, email: admin.email }, process.env.JWT_SECRET, { expiresIn: '30d' })
 
         res.status(200).json({
-            _id: user.id,
-            fname: user.fname,
-            lname: user.lname,
-            email: user.email,
+            _id: admin.id,
+            fname: admin.fname,
+            lname: admin.lname,
+            email: admin.email,
             token
         })
 
@@ -126,25 +126,25 @@ export const adminLogin = async (req, res) => {
     const { email, password } = req.body
 
     try {
-        const user = await User.findOne({ email })
+        const admin = await User.findOne({ email })
 
-        if (!user) {
+        if (!admin) {
             res.status(400).json({ message: 'User does not exist'})
         }
 
-        const isMatch = await bcrypt.compare(password, user.password)
+        const isMatch = await bcrypt.compare(password, admin.password)
         
         if (!isMatch){
             res.status(400).json({ message: 'Wrong password' })
         }
 
-        const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '30d'});
+        const token = jwt.sign({ email: admin.email }, process.env.JWT_SECRET, { expiresIn: '30d'});
 
         res.status(200).json({
-            id: user._id,
-            fname: user.fname,
-            lname: user.lname,
-            email: user.email,
+            id: admin._id,
+            fname: admin.fname,
+            lname: admin.lname,
+            email: admin.email,
             token   
         })
         
