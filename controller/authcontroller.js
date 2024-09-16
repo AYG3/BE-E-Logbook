@@ -95,7 +95,8 @@ export const adminSignUp = async (req, res) => {
         const userExists = await User.findOne({ email })
 
         if(userExists){
-            res.status(400).json({message: 'Admin User Already Exists' })
+            console.log(userExists);
+            return res.status(400).json({message: 'Admin User Already Exists' })
         }
          
         const admin = await User.create({
@@ -129,13 +130,13 @@ export const adminLogin = async (req, res) => {
         const admin = await User.findOne({ email })
 
         if (!admin) {
-            res.status(400).json({ message: 'User does not exist'})
+            return res.status(400).json({ message: 'User does not exist'})
         }
 
         const isMatch = await bcrypt.compare(password, admin.password)
         
         if (!isMatch){
-            res.status(400).json({ message: 'Wrong password' })
+           return res.status(440).json({ message: 'Wrong password' })
         }
 
         const token = jwt.sign({ email: admin.email }, process.env.JWT_SECRET, { expiresIn: '30d'});
