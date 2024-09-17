@@ -21,6 +21,10 @@ const logbookSchema = new mongoose.Schema({
         type: [String],
         trim: true
     },
+    comment: {
+        type: [String],
+        trim: true
+    },
     image: {
         type: String,
     },
