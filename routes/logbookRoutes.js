@@ -14,7 +14,8 @@ router.delete('/deleteLogbook/:entryId', protect, deleteUserLogbook)
 
 router.get('/admin/users', protect, adminGetAllUsers)
 // router.get('/admin/users', protect, isAdmin, adminGetAllUsers)
-router.get('/admin/user/logbooks/:userId', protect, isAdmin, adminGetUserLogbooks)
+// router.get('/admin/user/logbooks/:userId', protect, isAdmin, adminGetUserLogbooks)
+router.get('/admin/user/logbooks/:userId', protect, adminGetUserLogbooks)
 
 
 export default router;
