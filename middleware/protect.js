@@ -29,7 +29,7 @@ export const protect = async (req, res, next) => {
 
 
 export const isAdmin = (req, res, next) => {
-  console.log(req.user.role)
+  console.log("Request role: ", res.user.role);
   if (req.user &&  req.user.role == 'admin'){
     next();
   }
