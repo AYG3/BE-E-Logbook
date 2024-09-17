@@ -117,12 +117,14 @@ export const deleteUserLogbook = async (req, res) => {
   }
 }
 
+
+
 //Admin get all users
 export const adminGetAllUsers = async (req, res) => {
 
   try {
     const users = await User.find({ role: {$ne: 'admin'}}).select('-password'); //try not addding select()
-
+    
     res.status(200).json(users)
 
   } catch (error) {
