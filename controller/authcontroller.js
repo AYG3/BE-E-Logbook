@@ -114,6 +114,7 @@ export const adminSignUp = async (req, res) => {
             fname: admin.fname,
             lname: admin.lname,
             email: admin.email,
+            role: admin.role,
             token
         })
 
@@ -146,6 +147,7 @@ export const adminLogin = async (req, res) => {
             fname: admin.fname,
             lname: admin.lname,
             email: admin.email,
+            role: admin.role,
             token   
         })
         
