@@ -17,12 +17,12 @@ export const protect = async (req, res, next) => {
       console.log('Protect token decoded: ', decoded)
       console.log("req: ", req);
 
-      req.user = await User.findById(decoded.id);
-      console.log("Req user 2: ", req.user);
+      // req.user = await User.findById(decoded.id);
+      // console.log("Req user 2: ", req.user);
 
-      if (!req.user) {
-        return res.status(401).json({ message: "Not authorized, user not found" });
-      }
+      // if (!req.user) {
+      //   return res.status(401).json({ message: "Not authorized, user not found" });
+      // }
 
       next();
     } catch (error) {
