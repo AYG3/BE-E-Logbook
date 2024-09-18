@@ -25,6 +25,10 @@ const logbookSchema = new mongoose.Schema({
         type: [String],
         trim: true
     },
+    approval: {
+        type: String,
+        enum: ['approved', 'semi-approved', 'not-approved']
+    },
     image: {
         type: String,
     },
