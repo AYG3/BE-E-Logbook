@@ -152,3 +152,14 @@ export const adminGetUserLogbooks = async (req, res) => {
     
   }
 }
+
+//Admin's comment
+export const adminComment = async () => {
+  const { userId } = req.params;
+
+  try {
+    const user = await findByIdAndUpdate(userId, {comment, approval}, {new: true});    
+  } catch (error) {
+    
+  }
+}
