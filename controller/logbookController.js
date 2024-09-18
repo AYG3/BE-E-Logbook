@@ -154,17 +154,18 @@ export const adminGetUserLogbooks = async (req, res) => {
 }
 
 //Admin's comment
-export const adminComment = async () => {
-  const { userId } = req.params;
+export const adminComment = async (req, res) => {
+  const { entryId } = req.params;
+  const { comment, approval } = req.body;
 
   try {
-    const user = await Logbook.findByIdAndUpdate(userId, {comment, approval}, {new: true});    
+    const updateComment = await Logbook.findByIdAndUpdate(entryId, {comment, approval}, {new: true});    
 
-    if(!user){
+    if(!updateComment){
       return res.status(404).json({ message: "User not found"})
     }
     
-    res.status(200).json({ message: 'Successfuly commented'})
+    return res.status(200).json(updateComment);
   } catch (error) {
     console.log("Error in admin comment: ", error);
   }
