@@ -9,6 +9,7 @@ router.post('/login', login )
 router.post('/forgotpassword', forgotPassword)
 router.put('/restpassword/:resettoken', resetPassword)
 
+//admin
 router.post('/adminSignup', adminSignUp)
 router.post('/adminLogin', adminLogin)
 

@@ -1,6 +1,6 @@
 import express from "express";
-import { createLogbook, updateUserLogbook, getUserLogbooks, deleteUserLogbook, getUserLogbook, adminGetAllUsers, adminGetUserLogbooks, adminComment } from "../controller/logbookController.js";
-import { isAdmin, protect } from '../middleware/protect.js'
+import { createLogbook, updateUserLogbook, getUserLogbooks, deleteUserLogbook, getUserLogbook } from "../controller/logbookController.js";
+import { protect } from '../middleware/protect.js'
 
 const router = express.Router()
 
@@ -12,11 +12,7 @@ router.delete('/deleteLogbook/:entryId', protect, deleteUserLogbook)
 
 
 
-router.get('/admin/users', protect, adminGetAllUsers)
-// router.get('/admin/users', protect, isAdmin, adminGetAllUsers)
-// router.get('/admin/user/logbooks/:userId', protect, isAdmin, adminGetUserLogbooks)
-router.get('/admin/user/logbooks/:userId', protect, adminGetUserLogbooks)
-router.put('/admin/addComment/:entryId', protect, adminComment)
+
 
 
 export default router;
