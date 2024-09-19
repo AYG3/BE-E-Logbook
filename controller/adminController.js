@@ -1,5 +1,5 @@
-import Logbook from "../models/Logbook";
-import User from "../models/User";
+import Logbook from "../models/Logbook.js";
+import User from "../models/User.js";
 
 //Admin get all users
 export const adminGetAllUsers = async (req, res) => {
