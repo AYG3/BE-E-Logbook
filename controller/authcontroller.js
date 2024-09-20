@@ -107,7 +107,7 @@ export const adminSignUp = async (req, res) => {
             role: 'admin',
         })
 
-        const token = jwt.sign({ id: admin._id, email: admin.email }, process.env.JWT_SECRET, { expiresIn: '30d' })
+        const token = jwt.sign({ id: admin._id, email: admin.email, role: admin.role }, process.env.JWT_SECRET, { expiresIn: '30d' })
 
         res.status(200).json({
             _id: admin.id,
@@ -140,7 +140,7 @@ export const adminLogin = async (req, res) => {
            return res.status(440).json({ message: 'Wrong password' })
         }
 
-        const token = jwt.sign({ email: admin.email }, process.env.JWT_SECRET, { expiresIn: '30d'});
+        const token = jwt.sign({ email: admin.email, role: admin.role }, process.env.JWT_SECRET, { expiresIn: '30d'});
 
         res.status(200).json({
             id: admin._id,

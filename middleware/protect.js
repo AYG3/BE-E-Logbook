@@ -2,8 +2,9 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
 
+let token;
+let decoded;
 export const protect = async (req, res, next) => {
-  let token;
 
   if (
     req.headers.authorization &&
@@ -13,16 +14,12 @@ export const protect = async (req, res, next) => {
       token = req.headers.authorization.split(" ")[1];
       console.log('Token recieved: ', token)
 
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      decoded = jwt.verify(token, process.env.JWT_SECRET);
       console.log('Protect token decoded: ', decoded)
-      console.log("req: ", req);
+      console.log("req body user: ", req.body.user);
 
-      // req.user = await User.findById(decoded.id);
-      // console.log("Req user 2: ", req.user);
-
-      // if (!req.user) {
-      //   return res.status(401).json({ message: "Not authorized, user not found" });
-      // }
+      req.user = await User.findById(decoded.id);
+      console.log("Req decoded role: ", decoded.role);
 
       next();
     } catch (error) {
@@ -38,8 +35,7 @@ export const protect = async (req, res, next) => {
 
 
 export const isAdmin = (req, res, next) => {
-  console.log("Request role: ", res.user.role);
-  if (req.user &&  req.user.role == 'admin'){
+  if (decoded.role == 'admin'){
     next();
   }
   else {
