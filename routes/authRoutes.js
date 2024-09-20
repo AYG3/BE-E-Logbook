@@ -15,4 +15,8 @@ router.post('/adminLogin', adminLogin)
 
 //get user details
 router.get('/user/:id', protect, getUser)
+
+//reset password
+router.post('/forgotPassword', forgotPassword)
+// router.post()
 export default router;
