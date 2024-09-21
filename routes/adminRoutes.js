@@ -1,10 +1,11 @@
 import express from 'express'
-import { adminComment, adminDeleteUser, adminGetAllUsers, adminGetUser, adminGetUserLogbooks } from '../controller/adminController.js';
+import { adminComment, adminDeleteUser, adminDetails, adminGetAllUsers, adminGetUser, adminGetUserLogbooks } from '../controller/adminController.js';
 import { isAdmin, protect } from '../middleware/protect.js';
 
 
 const router = express.Router();
 
+router.get('/adminDetails/:id', adminDetails);
 router.get('/users', protect, isAdmin, adminGetAllUsers);
 router.get('/user/logbooks/:userId', protect, isAdmin, adminGetUserLogbooks);
 router.put('/addComment/:entryId', protect, isAdmin, adminComment);

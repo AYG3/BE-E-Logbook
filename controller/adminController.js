@@ -1,6 +1,24 @@
 import Logbook from "../models/Logbook.js";
 import User from "../models/User.js";
 
+
+//Admin get details
+export const adminDetails = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const admin = await User.find({ _id: id}).select('-password');
+
+    if (!admin ){
+      return res.status(404).json({message: 'admin not found'})
+    }
+
+    return res.status(200).json(admin);
+
+  }  catch (error) {
+    console.log("Error gettind admin details: ", error);
+  }
+}
 //Admin get all users
 export const adminGetAllUsers = async (req, res) => {
 
@@ -57,13 +75,13 @@ export const adminGetAllUsers = async (req, res) => {
     const { userId } = req.params
   
     try {
-      const userLogbooks = await Logbook.findById(userId);
+      const userLogbooks = await Logbook.find({ user: userId});
   
       if (!userLogbooks){
-        res.status(400).json({ message: 'User has not made any Logbooks/Entries'})
+        return res.status(400).json({ message: 'User has not made any Logbooks/Entries'})
       }
   
-      res.status(200).json(userLogbooks)
+      return res.status(200).json(userLogbooks)
   
     } catch (error) {
       console.log(error);

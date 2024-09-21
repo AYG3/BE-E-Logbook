@@ -2,6 +2,24 @@ import Logbook from "../models/Logbook.js";
 import User from "../models/User.js";
 
 
+//Get user details
+export const userDetails = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const user = await User.find({ _id: id}).select('-password');
+
+    if (!user ){
+      return res.status(404).json({message: 'user not found'})
+    }
+
+    return res.status(200).json(user);
+
+  }  catch (error) {
+    console.log("Error gettind user details: ", error);
+  }
+}
+
 //create user entry
 export const createLogbook = async (req, res) => {
   const { day, nature_of_activities, date, user, extra, image  } = req.body;
