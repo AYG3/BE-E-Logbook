@@ -15,7 +15,7 @@ export const adminGetAllUsers = async (req, res) => {
     }
   };
 
-  //Admin get all users
+  //Admin get a user
   export const adminGetUser = async (req, res) => {
     const { userId } = req.params;
 
@@ -26,13 +26,32 @@ export const adminGetAllUsers = async (req, res) => {
         return res.status(404).json({message: 'User not found'})
       }
 
-      console.log("User from adminGetUser: ", user);
       return res.status(200).json(user)
     } catch (error) {
       console.log('Error from adminGetUser: ', error);
     }
   }
   
+  //Admin delete user 
+  export const adminDeleteUser = async (req, res) =>{
+    const { userId } = req.params;
+
+    try {
+      const user = await User.findByIdAndDelete(userId);
+
+      if (!user){
+        console.error("User not found to delete: ", user);
+        return res.status(404).json({ message: 'User not found'});
+      }
+
+      return res.status(200).json({ message: 'Successfully deleted user'});
+
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+
   //Admin get a user's logbook
   export const adminGetUserLogbooks = async (req, res) => {
     const { userId } = req.params

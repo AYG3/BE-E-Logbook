@@ -16,10 +16,6 @@ export const protect = async (req, res, next) => {
 
       decoded = jwt.verify(token, process.env.JWT_SECRET);
       console.log('Protect token decoded: ', decoded)
-      console.log("req body user: ", req.body.user);
-
-      req.user = await User.findById(decoded.id);
-      console.log("Req decoded role: ", decoded.role);
 
       next();
     } catch (error) {
