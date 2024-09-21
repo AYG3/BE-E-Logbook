@@ -5,7 +5,7 @@ import User from "../models/User.js";
 export const adminGetAllUsers = async (req, res) => {
 
     try {
-      const users = await User.find({ role: {$ne: 'admin'}}).select('-password'); //try not addding select()
+      const users = await User.find({ role: {$ne: 'admin'}}).select('-password'); 
       
       res.status(200).json(users)
   
@@ -14,6 +14,24 @@ export const adminGetAllUsers = async (req, res) => {
         res.status(500).json({message: 'Error fetching users' })
     }
   };
+
+  //Admin get all users
+  export const adminGetUser = async (req, res) => {
+    const { userId } = req.params;
+
+    try {
+      const user = await User.findById(userId).select('-password');
+
+      if (!user) {
+        return res.status(404).json({message: 'User not found'})
+      }
+
+      console.log("User from adminGetUser: ", user);
+      return res.status(200).json(user)
+    } catch (error) {
+      console.log('Error from adminGetUser: ', error);
+    }
+  }
   
   //Admin get a user's logbook
   export const adminGetUserLogbooks = async (req, res) => {
