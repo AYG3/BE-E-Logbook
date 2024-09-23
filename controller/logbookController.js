@@ -10,7 +10,7 @@ export const userDetails = async (req, res) => {
     const user = await User.find({ _id: id}).select('-password');
 
     if (!user ){
-      return res.status(404).json({message: 'user not found'})
+      return res.status(404).send('user not found')
     }
 
     return res.status(200).json(user);
