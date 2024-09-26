@@ -57,7 +57,7 @@ export const createLogbook = async (req, res) => {
 export const getUserLogbooks = async (req, res) => {
     const { userId } = req.params
 
-    console.log(`Getting all entries userId: ${userId}`)
+    // console.log(`Getting all entries userId: ${userId}`)
 
     try {
         const logbooks = await Logbook.find({ user: userId})
