@@ -22,7 +22,7 @@ export const userDetails = async (req, res) => {
 
 //create user entry
 export const createLogbook = async (req, res) => {
-  const { day, nature_of_activities, date, user, extra, image  } = req.body;
+  const { day, nature_of_activities, date, extra, image  } = req.body;
   console.log(req.body)
 
   const userId = req.body.user
