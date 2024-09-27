@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
 import app from '../server.js';
-import PORT from '../'
+import dotenv from "dotenv";
 
+// dotenv.config();
 
-const PORT = 4444;
-const mongoDBURI = 'mongodb+srv://gilbertayoku3:XZ3mZSCSLI8Jbnnm@cluster0.c997hrt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+const PORT = process.env.PORT;
+const mongoDBURI = process.env.mongoDBURI;
 
 const connectDB = async () => {
     try {
