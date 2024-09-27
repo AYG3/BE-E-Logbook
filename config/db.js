@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 import app from '../server.js';
 import dotenv from "dotenv";
 
-// dotenv.config();
+dotenv.config();
 
 const PORT = process.env.PORT;
-const mongoDBURI = process.env.mongoDBURI;
+const mongoDBURI = process.env.mongoURI;
 
 const connectDB = async () => {
     try {
