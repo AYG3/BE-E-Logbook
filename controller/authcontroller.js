@@ -29,7 +29,6 @@ export const signUp = async (req, res) => {
 
     } catch (error) {
         res.status(500).json({ message: 'Server signUp() error'})
-        console.log(error, 'Signup authcontroller error')
     }
 }
 
