@@ -7,7 +7,8 @@ export const userDetails = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const user = await User.find({ _id: id}).select('-password');
+    // const user = await User.find({ _id: id}).select('-password');
+    const user = await User.findById(id);
 
     if (!user ){
       return res.status(404).send('user not found')
