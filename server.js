@@ -8,9 +8,12 @@ import dotenv from "dotenv";
 import cors from "cors";
 
 dotenv.config();
+
 app.use(
     session({
-        
+        secret: process.env.JWT_SECRET,
+        resave: false,
+        saveUnitialized: true
     })
 )
 
