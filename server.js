@@ -8,6 +8,11 @@ import dotenv from "dotenv";
 import cors from "cors";
 
 dotenv.config();
+app.use(
+    session({
+        
+    })
+)
 
 const app = express();
 app.use(cors());
