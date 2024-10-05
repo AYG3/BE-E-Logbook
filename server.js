@@ -1,4 +1,5 @@
 import express from "express";
+import session from "express-session";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import logbookRoutes from "./routes/logbookRoutes.js";
@@ -8,16 +9,17 @@ import dotenv from "dotenv";
 import cors from "cors";
 
 dotenv.config();
+const app = express();
 
 app.use(
     session({
         secret: process.env.JWT_SECRET,
         resave: false,
-        saveUnitialized: true
+        saveUninitialized: true
     })
 )
 
-const app = express();
+
 app.use(cors());
 
 app.use(express.json());
